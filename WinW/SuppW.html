@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supp Gap</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #000; /* Set a background color to avoid white lines */
+            color: white;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1; /* Ensure text is on top of video */
+        }
+
+        .video-text {
+            font-size: 70px; /* Slightly bigger font size */
+            font-weight: bold; /* Bold text */
+            margin-top: 20px;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 40px; /* Adjusted bottom margin to avoid overlapping with the header */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            color: white;
+            z-index: 1; /* Ensure controls are on top of video */
+        }
+
+        #enable-audio {
+            margin-right: 10px; /* Adjusted margin to move the button slightly to the left */
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        #volume-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #volume-slider {
+            width: 200px;
+            appearance: none;
+            height: 5px;
+            background: #fff;
+            outline: none;
+            border-radius: 5px;
+            margin: 0;
+        }
+
+        #volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        #home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        #home-button:hover {
+            background-color: #007BFF; /* Hover color */
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+        }
+
+        .developed-by {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .epsilon-link {
+            color: #9147FF;
+            text-decoration: none;
+        }
+
+        .epsilon-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="text-container">
+        <div id="top-gap-text" class="video-text">WON CAUSE OF SUPP GAP</div>
+    </div>
+
+    <video id="video" autoplay loop muted>
+        <source src="Crab.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <a id="home-button" href="../index.html">Home</a>
+
+    <div class="controls">
+        <button id="enable-audio" onclick="toggleAudio()">Enable Audio</button>
+        <div id="volume-container">
+            <input id="volume-slider" type="range" min="0" max="100" value="50" oninput="setVolume()">
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="developed-by">Developed by <a href="https://www.twitch.tv/epsiion" class="epsilon-link">Epsilon</a></p>
+    </div>
+
+    <script>
+        const topGapText = document.getElementById('top-gap-text');
+        const video = document.getElementById('video');
+        const enableAudioBtn = document.getElementById('enable-audio');
+        const volumeSlider = document.getElementById('volume-slider');
+
+        function toggleAudio() {
+            video.muted = !video.muted;
+            const buttonText = video.muted ? 'Enable Audio' : 'Disable Audio';
+            enableAudioBtn.textContent = buttonText;
+        }
+
+        function setVolume() {
+            const volume = volumeSlider.value / 100;
+            video.volume = volume;
+        }
+
+        // Function to generate a random color
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Function to update text color every 2.5 seconds
+        function updateTextColor() {
+            topGapText.style.color = getRandomColor();
+            setTimeout(updateTextColor, 2500);
+        }
+
+        // Start updating text color
+        updateTextColor();
+    </script>
+</body>
+
+</html>
